@@ -15,14 +15,11 @@ for num in range(len(ps)):
         p = p.split(':')
         numero_esperado = int(p[1])
 
-# print(numero_esperado)
-# print(type(numero_esperado))
 def localiza_premio():
     a = navegador.find_element_by_tag_name('a')
     a.click()
     sleep(2)
     ps = navegador.find_elements_by_tag_name('p')
-    sleep(2)
     
     ps_text = {ps[-1].text}
     print(ps_text)
