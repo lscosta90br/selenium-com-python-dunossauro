@@ -1,3 +1,6 @@
+#### Feito por:
+### Leandro Costa
+### com ajuda de: Carlos Augusto Moreno, [01.05.20 01:44]
 from selenium.webdriver import Chrome
 from time import sleep
 
@@ -8,28 +11,23 @@ navegador.get(url)
 
 sleep(2)
 
+a = navegador.find_element_by_tag_name('a')
 ps = navegador.find_elements_by_tag_name('p')
-for num in range(len(ps)):
-    p = ps[num].text
-    if "Numero esperado" in p:
-        p = p.split(':')
-        numero_esperado = int(p[1])
 
 def localiza_premio():
-    a = navegador.find_element_by_tag_name('a')
-    a.click()
-    sleep(2)
     ps = navegador.find_elements_by_tag_name('p')
-    
-    ps_text = {ps[-1].text}
+    ps_text = ps[-1].text.split()[-1]
     print(ps_text)
     return ps_text
 
+premio = localiza_premio()
 
-while 1:
-    lp = localiza_premio()
-    if len(lp) > 1:
-        print(f'aqui: {lp}')
-        break
+a.click()
+numero_gerado = localiza_premio()
 
+print(numero_gerado)
+print(premio)
 
+while numero_gerado != premio:
+    a.click()
+    numero_gerado = localiza_premio()
